@@ -17,9 +17,9 @@
 <img src="{{ post.header_image.url }}" alt="Image not found">
 {% endif %}
 {{post.body|safe}}
-<br><br>
+<br>
 <a href="{% url 'home' %}" class="btn btn-danger">GO BACK</a>
-<br><br>
+
 <hr>
 
 <form action="{% url 'like_post' post.pk %}" method="post">
@@ -31,7 +31,8 @@
     {% endif %}
     - {{ total_likes }} Likes
 </form>
-<br><br>
+
+<hr>
 <div class="card mb-3">
     <div class="row no-gutters">
         {% if post.author.profile.profile_pic %}
@@ -73,5 +74,21 @@
     </div>
 </div>
 
-
+<h2>Comments</h2>
+{% if not post.comments.all %}
+    No comments ye t... <a href="#">Add a comment</a>
+{% else %}
+    <a href="{% url 'add_comment' post.pk %}">Add comment</a>
+    <br><br>
+    {% for comment in post.comments.all %}
+        <strong>
+            Name: {{comment.name}} <br>
+            Date added: {{comment.date_added}}
+        </strong>
+        <br>
+        {{comment.body}}
+        <hr>
+    {%endfor%}
+{%endif%}
+<a href="{% url 'add_comment' post.pk %}">Add comment</a>
 {% endblock %}

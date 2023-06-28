@@ -5,9 +5,17 @@
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            
+            <input type="text" class="form-control" name="username" placeholder="Enter username....">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Enter password....">
+        </div>
         <button type="submit" class="btn-outline-success">Login</button>
     </form>
+    <br>
+    Not registered? Sign up <a href="{% url 'register' %}">here.</a>
 </div>
 
 {% endblock %}

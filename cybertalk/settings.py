@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'theblog',
     'members',
     'ckeditor',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
