@@ -49,23 +49,23 @@
                 <h5 class="card-title">{{post.author.first_name}} {{post.author.last_name}}</h5>
                 <p class="small text-muted">
                     {% if post.author.profile.website_url %}
-                    <a href="{% url 'show_profile_page' post.author.profile.id %}">Profile</a> | 
+                    <a href="{% url 'show_profile_page' post.author.profile.id %}">Profile</a> |
                     {% endif %}
                     {% if post.author.profile.website_url %}
-                    <a href="{{post.author.profile.website_url}}">Website</a> | 
+                    <a href="{{post.author.profile.website_url}}">Website</a> |
                     {% endif %}
                     {% if post.author.profile.website_url %}
-                    <a    href="{{post.author.profile.linkedin_url}}">LinkedIn</a> | 
+                    <a href="{{post.author.profile.linkedin_url}}">LinkedIn</a> |
                     {% endif %}
                     {% if post.author.profile.website_url %}
-                    <a    href="{{post.author.profile.github_url}}">GitHub</a> | 
+                    <a href="{{post.author.profile.github_url}}">GitHub</a> |
                     {% endif %}
                     {% if post.author.profile.website_url %}
-                    <a    href="{{post.author.profile.ig_url}}">Instagram</a>
+                    <a href="{{post.author.profile.ig_url}}">Instagram</a>
                     {% endif %}
-                    
-                     
-                    
+
+
+
                 </p>
                 <p class="card-text">{{post.author.profile.bio}}</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -76,19 +76,20 @@
 
 <h2>Comments</h2>
 {% if not post.comments.all %}
-    No comments ye t... <a href="#">Add a comment</a>
+No comments yet... <a href="#">Add a comment</a>
 {% else %}
-    <a href="{% url 'add_comment' post.pk %}">Add comment</a>
-    <br><br>
-    {% for comment in post.comments.all %}
-        <strong>
-            Name: {{comment.name}} <br>
-            Date added: {{comment.date_added}}
-        </strong>
-        <br>
-        {{comment.body}}
-        <hr>
-    {%endfor%}
+<a href="{% url 'add_comment' post.pk %}">Add comment</a>
+<br><br>
+{% for comment in post.comments.all %}
+<strong>
+    Name: {{comment.name}} <br>
+    Date added: {{comment.date_added}}
+</strong>
+<br>
+{{comment.body}}
+<hr>
+{%endfor%}
 {%endif%}
+<br>
 <a href="{% url 'add_comment' post.pk %}">Add comment</a>
 {% endblock %}

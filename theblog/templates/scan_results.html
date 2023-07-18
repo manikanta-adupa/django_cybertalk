@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Analysis results...{% endblock %}
+{% block content %}
+    <!-- scan_results.html -->
+<h1>Scan Results</h1>
+
+<table>
+  <tr>
+    <th>Host</th>
+    <th>Protocol</th>
+    <th>Port</th>
+    <th>State</th>
+    <th>Name</th>
+    <th>Product</th>
+  </tr>
+  {% for result in results %}
+    <tr>
+      <td>{{ result.host }}</td>
+      <td>{{ result.protocol }}</td>
+      <td>{{ result.port }}</td>
+      <td>{{ result.state }}</td>
+      <td>{{ result.name }}</td>
+      <td>{{ result.product }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+
+
+{% endblock %}

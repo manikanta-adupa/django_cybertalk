@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Search results...{% endblock %}
+{% block content %}
+    {% if searched %}
+        <h1>You searched for...{{searched}}</h1>
+        <br>
+        {% for tit in titles %}
+            <a href="{% url 'article-detail' tit.pk %}">{{tit.title}}</a>
+            <br>
+        {%endfor%}
+    {%else%}
+        <h1>You forgot to search!</h1>
+    {%endif%}
+
+
+{% endblock %}

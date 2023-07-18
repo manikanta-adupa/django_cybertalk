@@ -22,6 +22,7 @@ class Profile(models.Model):
     linkedin_url=models.CharField(max_length=255,null=True,blank=True)
     github_url=models.CharField(max_length=255,null=True,blank=True)
     ig_url=models.CharField(max_length=255,null=True,blank=True)
+    xyz=models.CharField(max_length=200,null=True)
 
     def __str__(self) -> str:
         return str(self.user)

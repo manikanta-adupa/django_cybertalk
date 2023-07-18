@@ -1,4 +1,5 @@
 from typing import Any, Dict
+import nmap
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post,Category,Comment
@@ -6,12 +7,42 @@ from .forms import PostForm,EditForm, CommentForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
 # Create your views here.
-# def home(request):
-#     return render(request, 'home.html',{})
+def home(request):
+    return render(request, 'home.html',{})
 
-# def CategoryView(request, cats):
-#     category_posts=Post.objects.filter(category=cats.title().replace('-',' '))
-#     return render(request, 'categories.html',{'cats':cats.title(), 'category_posts':category_posts})
+def CategoryView(request, cats):
+    category_posts=Post.objects.filter(category=cats.title().replace('-',' '))
+    return render(request, 'categories.html',{'cats':cats.title(), 'category_posts':category_posts})
+# from django.shortcuts import render
+# # nmap_path='C:/Users/91628/OneDrive/Desktop/final/virt/Lib/site-packages/nmap'
+# def analyze_website(request):
+#     if request.method == 'POST':
+#         target_ip = request.POST['url']
+#         scan_results = run_nmap_scan(target_ip)
+#         return render(request, 'scan_results.html', {'scan_results': scan_results})
+#     else:
+#          return render(request, 'scan_results.html')
+
+# def run_nmap_scan(target_ip):
+#     nm = nmap.PortScanner()
+#     nm.scan(target_ip, arguments='-Pn -sV')
+
+#     scan_results = []
+#     for host in nm.all_hosts():
+#         for proto in nm[host].all_protocols():
+#             ports = nm[host][proto].keys()
+#             for port in ports:
+#                 scan_results.append({
+#                     'host': host,
+#                     'protocol': proto,
+#                     'port': port,
+#                     'state': nm[host][proto][port]['state'],
+#                     'name': nm[host][proto][port]['name'],
+#                     'product': nm[host][proto][port]['product'],
+#                 })
+
+#     return scan_results
+
 
 def LikeView(request,pk):
     post=get_object_or_404(Post,id=request.POST.get('post_id'))
@@ -36,7 +67,14 @@ class HomeView(ListView):
          context["cat_menu"]=cat_menu
          return context
 
-
+def SearchView(request):
+    if request.method == "POST":
+          searched =request.POST['searched']
+          titles=Post.objects.filter(title__contains=searched)
+          return render(request,'searched.html',{"searched":searched, "titles":titles})
+    else:
+         return render(request,'searched.html',{})
+     
 
 def CategoryListView(request):
         cat_menu_list=Category.objects.all()
